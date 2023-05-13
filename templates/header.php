@@ -26,7 +26,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
     <div class="container">
-      <a href="/survey" class="navbar-brand">
+      <a href="/" class="navbar-brand">
         <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
              style="opacity: .8">
         <span class="brand-tex font-weight-ligh"><b style="color:#C92049">I4R</b><small> MODEL</small></a></span>
@@ -40,10 +40,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Left navbar links -->
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a href="/survey" class="nav-link">Home</a>
+            <a href="/" class="nav-link">Home</a>
           </li>
           <li class="nav-item">
-            <a href="/survey/recovery.php" class="nav-link">Reload Form</a>
+            <a href="/recovery.php" class="nav-link">Reload Form</a>
           </li>
         </ul>
       </div>
