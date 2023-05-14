@@ -26,7 +26,7 @@ include "templates/header.php";
                 <p class="card-text">
                 The industry 4.0 readiness for CBM is an evidence-based process to assure that an asset can use and integrate industry 4.0 into its condition-based maintenance strategy. It is designed to provide substantial evidence to the deployment owner for confidence in the project and the organization’s maintenance system.
                 </p>
-                <h2 class="text-dark"><small style="color:#C92049">Alero Concept</small></h2>
+                <h2 class="text-dark"><small style="color:#C92049">The Concept</small></h2>
                 <ul class="list-unstyled">
                   <li>The online self-assessment is broken down into 5 key dimensions  and 25 sub dimensions  with some focus on the technology dimensions which bothers more on 7 components modules of condition-based maintenance. Each key dimension contains questions and indicators on different areas or subdimensions. Below are the 5 core dimensions and questions pointing inth direction of the readiness check.
                     <ul>

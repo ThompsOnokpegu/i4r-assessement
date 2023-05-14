@@ -25,6 +25,7 @@ include "templates/header.php";
         <div class="row" style="padding-left:25px;">
           <div class="col-lg-12">
             <div class="card card-info card-outline">
+              <!-- <button id="printpdf" class="btn btn-block bg-gradient-info"><span class="nav-icon fas fa-plus"></span> Add New Customer</button> -->
               <div class="card-body">
                 <h2 class="text-dark">Evaluation of Industry 4.0 Readiness</h2>
                 <p class="card-text">
@@ -347,10 +348,10 @@ include "templates/header.php";
                 <div class="mailbox-controls with-borde text-center">
                   <div class="btn-group">
                     <?php //if($qid != 101) {?> 
-                    <a href="#" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Previous">
+                    <a href="#" id="downloadpdf" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Previous">
                     <i class="fas fa-download"></i> Download</a>
                     <?php //}?>
-                    <button type="submit" class="btn btn-info btn-sm"><i class="fas fa-print"></i> Print Report</button>
+                    <button id="printpdf" type="submit" class="btn btn-info btn-sm"><i class="fas fa-print"></i> Print Report</button>
                   </div>
                 </div>
                 </form>
@@ -374,6 +375,17 @@ include "templates/footer.php";
 
 
 <script>
+  //print page
+  const printButton = document.getElementById("printpdf");
+  const downloadButton = document.getElementById('downloadpdf');
+
+  printButton.addEventListener('click', function(){
+      window.print();
+  });
+  downloadButton.addEventListener('click', function(){
+      window.print();
+  });
+  
   //ALL DIMENSIONS
     const rachar = document.getElementById('radarChart');
     
