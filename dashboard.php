@@ -148,7 +148,7 @@ $rate = round(($completed['total']/$count['total'])*100,1);
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index" class="brand-link" style="text-decoration:none;">
+    <a href="/" class="brand-link" style="text-decoration:none;">
       <img src="dist/img/AdminLTELogo.png" alt="I4R Logo" class="brand-image img-circle elevation-2"
            style="opacity: 1">
       <span class="brand-text" style ="color:gold;"><b style="color:#fff">I4R</b><small> MODEL</small></span>
@@ -416,7 +416,7 @@ const rachar = document.getElementById('radarChart');
 const data = {
     labels: <?php echo $data_labels;?>,
     datasets: [{
-        label: 'Summary Assessment',
+        label: 'Dimension Summary',
         data: <?php echo $data_values; ?>,
         fill: true,
         backgroundColor: 'rgba(255, 99, 132, 0.2)',
