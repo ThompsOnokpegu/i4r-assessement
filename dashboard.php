@@ -13,6 +13,71 @@ function is_session_started(){
 }
 //check status
 if ( is_session_started() === FALSE ) session_start();
+
+//progress bar colors
+function progress_bar_color($dimension){
+  if($dimension=="Organisation"){
+    return 'progress-bar bg-primary';
+  }
+  if($dimension=="Technology/IT Solutions"){
+    return 'progress-bar bg-danger';
+  }
+  if($dimension=="People"){
+    return 'progress-bar bg-warning';
+  }
+  if($dimension=="Processes, Operations and Maintenance"){
+    return 'progress-bar bg-secondary';
+  }
+  if($dimension=="Sustainability (Environment)"){
+    return 'progress-bar bg-info';
+  }
+}
+
+//summary plot
+$connection = new PDO($dsn, $username, $password, $options);
+
+$sql = "SELECT dimension, AVG(response) AS score FROM survey_responses GROUP BY dimension";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$data = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+$values = array();
+$labels = array();
+foreach($data as $value){
+  array_push($values,round($value['score']));
+  array_push($labels,$value['dimension']);
+}
+
+$data_values = json_encode(array_values($values),JSON_NUMERIC_CHECK);
+$data_labels = json_encode(array_values($labels));
+
+
+$weighted = 0;
+  for ($i=0; $i < count($values); $i++) { 
+    $weighted += $values[$i];
+}
+
+
+//survey count - total
+$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid <= 95";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$count = $statement->fetch(PDO::FETCH_ASSOC);
+
+//survey count - completed
+$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid = 95";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$completed = $statement->fetch(PDO::FETCH_ASSOC);
+
+//survey count - unfinished
+$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid < 95";
+$statement = $connection->prepare($sql);
+$statement->execute();
+$unfinished = $statement->fetch(PDO::FETCH_ASSOC);
+
+$rate = round(($completed['total']/$count['total'])*100,1);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -107,7 +172,7 @@ if ( is_session_started() === FALSE ) session_start();
                with font-awesome or any other icon font library -->
           <li class="nav-item">
                      
-            <a href="../customers" class="nav-link office" aria-disabled="true">
+            <a href="/dashboard.php" class="nav-link office" aria-disabled="true">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Dashboard
@@ -130,13 +195,6 @@ if ( is_session_started() === FALSE ) session_start();
               </p>
             </a>
           </li>
-          <li class="nav-item">
-          <button id="printpdf" class="btn btn-block bg-gradient-info"><span class="nav-icon fas fa-plus"></span> Add New Customer</button>
-              <p >
-                Print
-              </p>
-
-          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -154,7 +212,7 @@ if ( is_session_started() === FALSE ) session_start();
               </div><!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
                   <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
               </div><!-- /.col -->
@@ -165,44 +223,144 @@ if ( is_session_started() === FALSE ) session_start();
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
+              <!-- Small boxes (Stat box) -->
                 <div class="row">
-                    <div class="col-12">
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-info">
+                      <div class="inner">
+                        <h3><?php echo $count['total']; ?></h3>
+
+                        <p>Total Taken</p>
+                      </div>
+                      <div class="icon">
+                        <i class="fas fas-bag"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">Survey Count <i class="fas fa-chart-bar"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                      <div class="inner">
+                        <h3><?php echo $completed['total']; ?></h3>
+
+                        <p>Completed</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">Survey Count <i class="fas fa-chart-bar"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                      <div class="inner">
+                        <h3><?php echo $unfinished['total']; ?></h3>
+
+                        <p>Unfinished</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">Survey Count <i class="fas fa-chart-bar"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                  <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                      <div class="inner">
+                      <h3><?php echo $rate; ?><sup style="font-size: 20px">%</sup></h3>
+
+                        <p>Completion Rate</p>
+                      </div>
+                      <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                      </div>
+                      <a href="#" class="small-box-footer">Survey Count <i class="fas fa-chart-bar"></i></a>
+                    </div>
+                  </div>
+                  <!-- ./col -->
+                </div>
+                <div class="row">
+                  <div class="col-md-7 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
-                            <span>Assessement Entries</span>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body table-responsive">
-                        <table id="customer_table" class="table table-striped">
+                      <div class="card-header">
+                          <span>Assessement Entries</span>
+                      </div>
+                      <!-- /.card-header -->
+                      <div class="card-body table-responsive">
+                        <table id="users_table" class="table table-striped">
                             <thead>
                             <tr>
                             <th>SRC</th>
-                            <th>First Name</th>
+                            <th>Full Name</th>
                             <th>E-Mail</th>
                             <th>Industry</th>
                             <th>Status</th>
                             </tr>
                             </thead>
                         </table>
-                        </div>
-                        <!-- /.card-body -->
+                      </div>
+                      <!-- /.card-body -->
                     </div>
+                  </div>
+                  <div class="col-md-5 col-sm-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">
+                          Dimension Levels
+                        </h3>
+                      </div>
+                      <div class="card-body">
+                      <p class="text-center">
+                           <?php
+                            
+                           ?>
+                            <strong>Overall (Weighted): <?php echo round($weighted/count($values),1); ?></strong>
+                          </p>
+                          <?php for ($i=0; $i < count($values); $i++) { ?>
+                            <div class="progress-group">
+                              <?php $label = $labels[$i]; echo $label;?>
+                              <span class="float-right"><b>Level</b> <?php echo $values[$i];?></span>
+                              <div class="progress progress-sm">
+                                <div class="<?php echo progress_bar_color($label);?>" style="width: <?php echo ($values[$i]/4)*100;?>%"></div>
+                              </div>
+                            </div>
+                        <?php } ?>
+                      </div>
                     </div>
+                    <div class="card">
+                      <div class="card-header">
+                        <h3 class="card-title">
+                          <i class="fas fa-chart-pie mr-1"></i>
+                          Summary Plot
+                        </h3>
+                      </div><!-- /.card-header -->
+                      <div class="card-body">
+                      <canvas id="radarChart"></canvas>
+                      </div><!-- /.card-body -->
+                    </div>
+                    
+                  </div> <!-- /col-6  -->
                 </div>
+                <!-- /.card -->
             </div>
         </section>
     <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-<footer class="main-footer">
-  <div class="d-none d-sm-inline-block">
-  <strong>2023 &copy; <b style="color:#C92049">I4R</b><small> MODEL</small></a>.</strong>
-  </div>
-    
+  <footer class="main-footer">
+    <div class="d-none d-sm-inline-block">
+      <strong>2023 &copy; <b style="color:#C92049">I4R</b><small> MODEL</small></a>.</strong>
+    </div>
     <div class="float-right d-none d-sm-inline-block">
       By <a href="https://deepr.ng">AJThompson</a>
-    </div>
-    
+    </div>    
   </footer>
 
   <!-- Control Sidebar -->
@@ -215,9 +373,6 @@ if ( is_session_started() === FALSE ) session_start();
 <!-- jQuery -->
 <script type="text/javascript" src="static/jquery.js"></script>
 
-<!-- jQuery UI 1.11.4 -->
-<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
   $.widget.bridge('uibutton', $.ui.button)
 </script>
@@ -225,53 +380,28 @@ if ( is_session_started() === FALSE ) session_start();
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- bootstrap color picker -->
 <script src="plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
-<!-- ChartJS -->
-<script src="plugins/chart.js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="lugins/sparklines/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="plugins/jqvmap/jquery.vmap.min.js"></script>
-<script src="plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="plugins/moment/moment.min.js"></script>
-<script src="plugins/daterangepicker/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="plugins/summernote/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
 <script src="dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
 <!-- Datatable responsive -->
 <script type="text/javascript" src="static/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="static/dataTables.bootstrap5.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-const printButton = document.getElementById("printpdf");
-printButton.addEventListener('click', function(){
-    window.print();
-});
-
+//datatable
 $(document).ready(function(){
-    $("#order_table").DataTable({
+    $("#users_table").DataTable({
           ajax:{
-            url:'includes/dt.php',
+            url:'survey_dt.php',
             dataSrc:''
           },
           columns:[
-            {data:'order_id'},
-            {data:'client'},
-            {data:'design'},
-            {data:'order_date'},
-            {data:100},
+            {data:'passcode'},
+            {data:'fullname'},
+            {data:'email_address'},
+            {data:'industry'},
+            {data:5},
           ],
           responsive: true,
           paging: true,
@@ -280,6 +410,52 @@ $(document).ready(function(){
     });
 });
 
+//radar plot
+const rachar = document.getElementById('radarChart');
+
+const data = {
+    labels: <?php echo $data_labels;?>,
+    datasets: [{
+        label: 'Summary Assessment',
+        data: <?php echo $data_values; ?>,
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+    }]
+};
+const config = {
+        type: 'radar',
+        data: data,
+        options: {
+            elements: {
+                line: {
+                    borderWidth: 3
+                }
+            },
+            scales: {
+                r: {
+                    max: 4,
+                    min: 0,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            },
+            plugins: {
+            legend: {
+                display: true,
+                labels: {
+                    color: 'rgb(42, 170, 190)'
+                }
+            }
+        }
+        },
+    };
+new Chart(rachar,config);
 </script>
 </body>
 </html>

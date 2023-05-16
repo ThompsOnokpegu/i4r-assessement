@@ -1,7 +1,13 @@
 <?php
 require "config.php";
+
 try {
-    $userid = $_SESSION['user_id'];
+    $userid = "";
+    if(isset($_GET['src'])){
+      $userid = $_GET['src'];
+    }else{
+      $userid = $_SESSION['user_id'];
+    }
     $connection = new PDO($dsn, $username, $password, $options);
   
     //$sql = "SELECT customization,digital_feature,data_driven_service,share_revenue,data_usage,overall FROM responses WHERE user_id = '$user_id'";

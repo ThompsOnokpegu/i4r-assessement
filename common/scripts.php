@@ -11,34 +11,6 @@ if (empty($_SESSION['csrf'])) {
   }
 }
 
-define('CUSTOMIZATION',10);
-define('DATA_USAGE',25);
-define('SHARE_REVENUE',40);
-define('DIGITAL_FEATURE',55);
-define('DATA_DRIVEN_SERVICE',70);
-define('OVERALL',85);
-
-function steps($page){
-  if($page == 101){
-    return CUSTOMIZATION;
-  }  
-  if($page == 102){
-    return DATA_USAGE;
-  } 
-  if($page == 103){
-    return SHARE_REVENUE;
-  }  
-  if($page == 104){
-    return DIGITAL_FEATURE;
-  }  
-  if($page == 105){
-    return DATA_DRIVEN_SERVICE;
-  }  
-  if($page == 106){
-    return OVERALL;
-  }  
-}
-
 function escape($html) {
   return htmlspecialchars($html, ENT_QUOTES | ENT_SUBSTITUTE, "UTF-8");
 }
