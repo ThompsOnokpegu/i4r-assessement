@@ -13,7 +13,12 @@ try {
   $result = $statement->fetchAll();
   $users = array();
   foreach ($result as $user) {
-      array_push($user,'<a type="button" class="btn btn-info btn-xs" href="report.php?src='.$user[3].'">Report</a>');
+    if($user[4]==95){
+        array_push($user,'<a type="button" class="btn btn-info btn-xs" target="_blank" href="report.php?src='.$user[3].'">Report</a>');
+    }else{
+        array_push($user,'<span class="badge badge-danger">Incomplete</span>');
+    }
+      
       $users[] = $user;
   }
   echo json_encode($users);

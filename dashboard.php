@@ -162,7 +162,7 @@ $rate = round(($completed['total']/$count['total'])*100,1);
           <img src="dist/img/user1-128x128.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block" style="text-decoration:none;">Chinedu<?php //echo strtoupper($_SESSION['loggedIn']);?></a>
+          <a href="#" class="d-block" style="text-decoration:none;">Chinedu Onyeme<?php //echo strtoupper($_SESSION['loggedIn']);?></a>
         </div>
       </div>
          <!-- Sidebar Menu -->
@@ -321,7 +321,7 @@ $rate = round(($completed['total']/$count['total'])*100,1);
                            <?php
                             
                            ?>
-                            <strong>Overall (Weighted): <?php echo round($weighted/count($values),1); ?></strong>
+                            <strong>All Entries (Weighted): <?php echo round($weighted/count($values),1); ?></strong>
                           </p>
                           <?php for ($i=0; $i < count($values); $i++) { ?>
                             <div class="progress-group">
@@ -338,7 +338,7 @@ $rate = round(($completed['total']/$count['total'])*100,1);
                       <div class="card-header">
                         <h3 class="card-title">
                           <i class="fas fa-chart-pie mr-1"></i>
-                          Summary Plot
+                          All Entries Plot
                         </h3>
                       </div><!-- /.card-header -->
                       <div class="card-body">
