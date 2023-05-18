@@ -42,28 +42,54 @@ include "templates/header.php";
                     <h2 class="text-dark"><small style="color:#C92049">Overall Evaluation</small></h2>
                     <p class="card-text">Your organisation or team has a ranking of <strong style="color:#C92049"><?php echo round($weighted/count($values),1); ?></strong> in the overall evaluation and details of your readiness in the 5 dimensions of industry 4.0 are:</p>   
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-5">
                         <canvas id="radarChart"></canvas>
                       </div>
+                      <div class="col-md-1"></div>
                       <div class="col-md-6">
                        
-                        <div class="col-md-9" style="font-size:12px;">
-                        <p class="text-center">
-                            
-                            <strong>Overall (Weighted): <?php echo round($weighted/count($values),1); ?></strong>
-                          </p>
-                        <?php for ($i=0; $i < count($values); $i++) { ?>
-                          <div class="progress-group">
-                            <?php $label = $labels[$i]; echo $label;?>
-                            <span class="float-right"><b>Level</b> <?php echo $values[$i];?></span>
-                            <div class="progress progress-sm">
-                              <div class="<?php echo progress_bar_color($label);?>" style="width: <?php echo ($values[$i]/4)*100;?>%"></div>
+                        <div class="col-md-12" style="font-size:13px;">
+                          <p class="text-center">
+                              
+                              <strong>Overall (Weighted): <?php echo round($weighted/count($values),1); ?></strong>
+                            </p>
+                          <?php for ($i=0; $i < count($values); $i++) { ?>
+                            <div class="progress-group">
+                              <?php $label = $labels[$i]; echo $label;?>
+                              <span class="float-right"><b>Level</b> <?php echo $values[$i];?></span>
+                              <div class="progress progress-sm">
+                                <div class="<?php echo progress_bar_color($label);?>" style="width: <?php echo ($values[$i]/4)*100;?>%"></div>
+                              </div>
                             </div>
-                          </div>
-                        <?php } ?>
-                          <!-- /.progress-group -->
+                          <?php } ?>
+                            <!-- /.progress-group -->
                         </div>
+                        <br>
                         <!-- /.col -->
+                        <div class="col-md-12">
+                        <table class="table table-hover table-sm" style="font-size:13px;">
+                          <thead>
+                            <tr>
+                              <th scope="col">Level Outcomes</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td>Level 0 - No evidence of I4.0 implementation.</td>
+                            </tr>
+                            <tr>
+                              <td>Level 1 - Informal/inadequate processes in place for I4.0 integration to CBM.</td>
+                            </tr>
+                            <tr>
+                              <td>Level 2 - Formal processes in place and partial implementation of I4.0 in CBM.</td>
+                            </tr>
+                              <td>Level 3 - Implementation of I4.0 in CBM commenced and in progress.</td>
+                            </tr>
+                              <td>Level 4 - I4.0 Fully implemented in CBM (I4.0 based CBM) with evidence of implementation.</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -443,6 +469,7 @@ function shortLabels(labels){
     const data = {
         labels: shortLabels(overall_labels),
         datasets: [{
+            label:"Summary Dataset",
             data: <?php echo $data_values; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -490,6 +517,7 @@ function shortLabels(labels){
     const org_data = {
         labels: shortLabels(org_labels),
         datasets: [{
+            label:"Organisation Dataset",
             data: <?php echo $org_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -536,6 +564,7 @@ function shortLabels(labels){
     const people_data = {
         labels: shortLabels(people_labels),
         datasets: [{
+            label:"People Dataset",
             data: <?php echo $people_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -582,6 +611,7 @@ function shortLabels(labels){
     const tech_data = {
         labels: shortLabels(tech_labels),
         datasets: [{
+           label:"Industry 4.0 Solutions Dataset",
             data: <?php echo $tech_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -628,6 +658,7 @@ function shortLabels(labels){
     const pom_data = {
         labels: shortLabels(pom_labels),
         datasets: [{
+            label:"Process, Operation & Maintenance Dataset",
             data: <?php echo $pom_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -674,6 +705,7 @@ function shortLabels(labels){
     const sus_data = {
         labels: shortLabels(sus_labels),
         datasets: [{
+            label:"Sustainability(Environment) Dataset",
             data: <?php echo $sus_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
