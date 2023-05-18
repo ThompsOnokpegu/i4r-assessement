@@ -83,7 +83,7 @@ $progress_bar = intval((($last_qst-1)/$questions_count['max']) * 100);
                       if($category=="People"){
                         include "templates/people.php"; 
                       }
-                      if($category=="Technology/IT Solutions"){
+                      if($category=="Industry 4.0 Solutions"){
                         include "templates/tech.php"; 
                       }
                       if($category=="Processes, Operations and Maintenance"){

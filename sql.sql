@@ -1,0 +1,6 @@
+UPDATE survey_responses SET sub_dimension = "Communication and Collaboration" WHERE sub_dimension = "Communication and Collaboration (Structure)"
+UPDATE survey_questions SET sub_category = "Communication and Collaboration" WHERE sub_category = "Communication and Collaboration (Structure)"
+UPDATE survey_questions SET category = "Industry 4.0 Solutions" WHERE category = "Technology/IT Solutions"
+UPDATE survey_responses SET dimension = "Industry 4.0 Solutions" WHERE dimension = "Technology/IT Solutions"
+UPDATE survey_questions SET sub_category = "Measurement and CM Techniques" WHERE sub_category = "Condition Monitoring (CM) Techniques" OR sub_category="Measurement"
+UPDATE survey_responses SET sub_dimension = "Measurement and CM Techniques" WHERE sub_dimension = "Condition Monitoring (CM) Techniques" OR sub_dimension="Measurement"

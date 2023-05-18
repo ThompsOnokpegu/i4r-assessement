@@ -205,7 +205,7 @@ include "templates/header.php";
                 </div><!--sub-dimension -->
                 <div class="row"><!--TECHNOLOGY CHART -->
                   <div class="col-md-12">
-                    <h3 class="text-dark">3. Technology/IT Solutions</h3>
+                    <h3 class="text-dark">3. Industry 4.0 Solutions</h3>
                     <div class="row">
                       <div class="col-md-6">
                           <canvas id="techChart"></canvas>
@@ -220,7 +220,7 @@ include "templates/header.php";
                                 $tech_weighted += $tech_values[$i];
                               }
                             ?>
-                            <strong>Technology (Weighted): <?php echo round($tech_weighted/count($tech_values),1); ?></strong>
+                            <strong>Industry 4.0 Solutions (Weighted): <?php echo round($tech_weighted/count($tech_values),1); ?></strong>
                           </p>
                         <?php for ($i=0; $i < count($tech_values); $i++) { ?>
                           <div class="progress-group">
@@ -326,13 +326,13 @@ include "templates/header.php";
                           <p class="text-center">
                             <?php 
                               $sus_weighted = 0;
-                              for ($i=0; $i < count($sus_values); $i++) { 
+                              for ($i=0; $i < count($sus_values)-1; $i++) { 
                                 $sus_weighted += $sus_values[$i];
                               }
                             ?>
-                            <strong>Sustainability(Environment): <?php echo round($sus_weighted/count($sus_values),1); ?></strong>
+                            <strong>Sustainability(Environment): <?php echo round($sus_weighted/(count($sus_values)-1),1); ?></strong>
                           </p>
-                        <?php for ($i=0; $i < count($sus_values); $i++) { ?>
+                        <?php for ($i=0; $i < count($sus_values)-1; $i++) { ?>
                           <div class="progress-group">
                             <?php $sus_label = $sus_labels[$i];
                             echo $sus_label;
@@ -351,7 +351,7 @@ include "templates/header.php";
                             <!-- TODO: Actions to improve readiness in this dimension -->
                           <?php
                             $connection = new PDO($dsn, $username, $password, $options);
-                            $level = round($sus_weighted/count($sus_values),0);
+                            $level = round($sus_weighted/count($sus_values)-1,0);
                             $sql = "SELECT action_point FROM recommendations WHERE labels = 'Sustainability (Environment)' AND level =$level";
                             $org_stmt = $connection->prepare($sql);
                             $org_stmt->execute();

@@ -55,7 +55,7 @@ try {
   $people_sub = json_encode(array_values($people_labels));
 
   //TECHNOLOGY/IT SOLUTIONS
-  $sql_tech = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'Technology/IT Solutions' GROUP BY sub_dimension";
+  $sql_tech = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'Industry 4.0 Solutions' GROUP BY sub_dimension";
   $statement_tech = $connection->prepare($sql_tech);
   $statement_tech->execute();
   $tech_results = $statement_tech->fetchAll(PDO::FETCH_ASSOC);
@@ -93,6 +93,8 @@ try {
      array_push($sus_values,round($value['score']));
      array_push($sus_labels,$value['sub_dimension']);
    }
+   array_push($sus_values,0);
+   array_push($sus_labels,"Others (Negligible)");
    $sus_data = json_encode(array_values($sus_values),JSON_NUMERIC_CHECK);
    $sus_sub = json_encode(array_values($sus_labels));
 
@@ -105,7 +107,7 @@ function progress_bar_color($dimension){
   if($dimension=="Organisation"){
     return 'progress-bar bg-primary';
   }
-  if($dimension=="Technology/IT Solutions"){
+  if($dimension=="Industry 4.0 Solutions"){
     return 'progress-bar bg-danger';
   }
   if($dimension=="People"){

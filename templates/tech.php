@@ -1,6 +1,5 @@
 <p class="card-text">
-The technological aspect of this model majors on 8 of the 9 industry 4.0 that are applicable to CBM in the oil and gas with focus on their levels of integration into the 7 modules of CBM which are: Data collection and acquisition; Data transmission and communication; Data storage and warehousing; Data processing and analysis; Maintenance decision support; Diagnosis
-Prognosis. The sub-dimension under this dimension are:
+  This dimension emphasizes eight Industry 4.0 technologies relevant to <em>Condition Based Maintenance (CBM)</em> in the oil and gas sector, concentrating on their integration levels within seven key CBM components. These components include: data collection and acquisition; data transmission and communication; data storage and warehousing; data processing and analysis; maintenance decision support; and diagnosis prognosis. The sub-dimensions within this dimension are as follows:
 </p>
 <ul>
     <li>Cloud Technologies (CT)</li>
