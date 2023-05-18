@@ -6,21 +6,33 @@ $error = false;
 if(isset($_POST['survey_signup'])){
 
   try{
-
     $conn = new PDO($dsn,$username,$password,$options);
-
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
     $industry = $_POST['industry'];
     $passcode = $_POST['passcode'];
 
-    $query = "SELECT email_address FROM users WHERE email_address=:email_address";
+    $query = "SELECT fullname,email_address,industry,passcode,last_qid FROM users WHERE email_address=:email_address";
     $st = $conn->prepare($query);
     $st->bindValue(':email_address',$email);
     $st->execute();
-    
+    $result = $st->fetch(PDO::FETCH_ASSOC);
     if($st->rowCount()>0){
-      $error = true;
+      $user = array(
+        "fullname" => $result['fullname'],
+        "email_address" => $result['email_address'],
+        "industry" => $result['industry'],
+        "passcode" => $passcode,
+        "last_qid" => 1
+      );
+      $sql = sprintf("INSERT INTO %s (%s) values (%s)","users",implode(", ", array_keys($user)),":" . implode(", :", array_keys($user)));
+      $stm = $conn->prepare($sql);
+      $stm->execute($user);
+      if($stm->rowCount()==1){  
+        $_SESSION['user_id'] = $passcode; 
+        $_SESSION['qgroup'] = 1;
+        header("Location: i40-readiness-assessement.php");
+      } 
     }else{
       $user = array(
         "fullname" => $fullname,

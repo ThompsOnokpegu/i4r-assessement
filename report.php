@@ -392,7 +392,6 @@ include "templates/footer.php";
     const data = {
         labels: <?php echo $data_labels; ?>,
         datasets: [{
-            label: '<?php echo $userid;?>',
             data: <?php echo $data_values; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -418,7 +417,8 @@ include "templates/footer.php";
                     min: 0,
                     ticks: {
                         stepSize: 1
-                    }
+                    },
+                    beginAtZero:true
                 }
             },
             plugins: {
@@ -439,7 +439,6 @@ include "templates/footer.php";
     const org_data = {
         labels: <?php echo $org_sub; ?>,
         datasets: [{
-            label: '<?php echo $userid;?>',
             data: <?php echo $org_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -486,7 +485,6 @@ include "templates/footer.php";
     const people_data = {
         labels: <?php echo $people_sub; ?>,
         datasets: [{
-            label: '<?php echo $userid;?>',
             data: <?php echo $people_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -533,7 +531,6 @@ include "templates/footer.php";
     const tech_data = {
         labels: <?php echo $tech_sub; ?>,
         datasets: [{
-            label: '<?php echo $userid;?>',
             data: <?php echo $tech_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -580,7 +577,6 @@ include "templates/footer.php";
     const pom_data = {
         labels: <?php echo $pom_sub; ?>,
         datasets: [{
-            label: '<?php echo $userid;?>',
             data: <?php echo $pom_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
@@ -627,7 +623,6 @@ include "templates/footer.php";
     const sus_data = {
         labels: <?php echo $sus_sub; ?>,
         datasets: [{
-            label: '<?php echo $userid;?>',
             data: <?php echo $sus_data; ?>,
             fill: true,
             backgroundColor: 'rgba(42, 170, 190, 0.1)',
