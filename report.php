@@ -385,12 +385,63 @@ include "templates/footer.php";
   downloadButton.addEventListener('click', function(){
       window.print();
   });
-  
+  ////FUNCTION////
+  function formatLabel(str, maxwidth){
+  var sections = [];
+  var words = str.split(" ");
+  var temp = "";
+
+  words.forEach(function(item, index){
+    if(temp.length > 0)
+    {
+      var concat = temp + ' ' + item;
+
+      if(concat.length > maxwidth){
+        sections.push(temp);
+        temp = "";
+      }
+      else{
+        if(index == (words.length-1)) {
+          sections.push(concat);
+          return;
+        }
+        else {
+          temp = concat;
+          return;
+        }
+      }
+    }
+
+    if(index == (words.length-1)) {
+      sections.push(item);
+      return;
+    }
+
+    if(item.length < maxwidth) {
+      temp = item;
+    }
+    else {
+      sections.push(item);
+    }
+
+  });
+
+  return sections;
+}
+
+function shortLabels(labels){
+  var new_labels = [];
+  for (let i = 0; i < labels.length; i++) {
+     new_labels.push(formatLabel(labels[i],15));
+  }
+  return new_labels;
+}
+  ////END FUNCTION///
   //ALL DIMENSIONS
     const rachar = document.getElementById('radarChart');
-    
+    var overall_labels = <?php echo $data_labels; ?>;
     const data = {
-        labels: <?php echo $data_labels; ?>,
+        labels: shortLabels(overall_labels),
         datasets: [{
             data: <?php echo $data_values; ?>,
             fill: true,
@@ -435,9 +486,9 @@ include "templates/footer.php";
 
     //ORGANISATION
     const org_chart = document.getElementById('orgChart');
-    
+    var org_labels = <?php echo $org_sub; ?>;
     const org_data = {
-        labels: <?php echo $org_sub; ?>,
+        labels: shortLabels(org_labels),
         datasets: [{
             data: <?php echo $org_data; ?>,
             fill: true,
@@ -481,9 +532,9 @@ include "templates/footer.php";
 
     //PEOPLE
     const people_chart = document.getElementById('peopleChart');
-    
+    var people_labels = <?php echo $people_sub; ?>;
     const people_data = {
-        labels: <?php echo $people_sub; ?>,
+        labels: shortLabels(people_labels),
         datasets: [{
             data: <?php echo $people_data; ?>,
             fill: true,
@@ -527,9 +578,9 @@ include "templates/footer.php";
 
     //TECHNOLOGY
     const tech_chart = document.getElementById('techChart');
-    
+    var tech_labels = <?php echo $tech_sub; ?>;
     const tech_data = {
-        labels: <?php echo $tech_sub; ?>,
+        labels: shortLabels(tech_labels),
         datasets: [{
             data: <?php echo $tech_data; ?>,
             fill: true,
@@ -573,9 +624,9 @@ include "templates/footer.php";
 
     //PROCESSES, OPERATIONS AND MAINTENANCE
     const pom_chart = document.getElementById('pomChart');
-    
+    var pom_labels = <?php echo $pom_sub; ?>;
     const pom_data = {
-        labels: <?php echo $pom_sub; ?>,
+        labels: shortLabels(pom_labels),
         datasets: [{
             data: <?php echo $pom_data; ?>,
             fill: true,
@@ -617,11 +668,11 @@ include "templates/footer.php";
     };
     new Chart(pom_chart,pom_config);
 
-    //PROCESSES, OPERATIONS AND MAINTENANCE
+    //SUSTAINABILITY(ENVIRONMENT)
     const sus_chart = document.getElementById('susChart');
-    
+    var sus_labels = <?php echo $sus_sub; ?>;
     const sus_data = {
-        labels: <?php echo $sus_sub; ?>,
+        labels: shortLabels(sus_labels),
         datasets: [{
             data: <?php echo $sus_data; ?>,
             fill: true,

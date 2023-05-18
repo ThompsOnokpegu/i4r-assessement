@@ -77,10 +77,7 @@ try {
   $pom_labels = array();
   foreach($pom_results as $value){
     array_push($pom_values,round($value['score']));
-    $pom_label=$value['sub_dimension'];
-    if (strlen($pom_label) > 30)
-      $pom_label = substr($pom_label, 0, 27) . '...';
-    array_push($pom_labels,$pom_label);
+    array_push($pom_labels,$value['sub_dimension']);
   }
   $pom_data = json_encode(array_values($pom_values),JSON_NUMERIC_CHECK);
   $pom_sub = json_encode(array_values($pom_labels));
@@ -121,4 +118,6 @@ function progress_bar_color($dimension){
     return 'progress-bar bg-info';
   }
 }
+
+
 ?>
