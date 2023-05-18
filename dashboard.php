@@ -19,7 +19,7 @@ function progress_bar_color($dimension){
   if($dimension=="Organisation"){
     return 'progress-bar bg-primary';
   }
-  if($dimension=="Technology/IT Solutions"){
+  if($dimension=="Industry 4.0 Solutions"){
     return 'progress-bar bg-danger';
   }
   if($dimension=="People"){
