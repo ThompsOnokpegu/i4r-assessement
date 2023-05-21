@@ -29,7 +29,7 @@ include "templates/header.php";
               <div class="card-body">
                 <h2 class="text-dark">Evaluation of Industry 4.0 Readiness</h2>
                 <p class="card-text">
-                Your organisation or team has achieved a score of 2.4 in the overall assessment. The readiness or maturity of your organisation in the five dimensions of Industry 4.0 is as follows:
+                We appreciate your effort in completing the Industry 4.0 readiness assessment. Below, you'll find your results and specific actions you can take to enhance and progress on your journey of implementing Industry 4.0 for Condition-Based Maintenance (CBM).
                 </p>
                 <div class="row"><!--SUMMARY CHART -->
                 <?php 
@@ -40,7 +40,8 @@ include "templates/header.php";
                             ?>
                   <div class="col-md-12">
                     <h2 class="text-dark"><small style="color:#C92049">Overall Evaluation</small></h2>
-                    <p class="card-text">Your organisation or team has a ranking of <strong style="color:#C92049"><?php echo round($weighted/count($values),1); ?></strong> in the overall evaluation and details of your readiness in the 5 dimensions of industry 4.0 are:</p>   
+                     
+                    <p class="card-text">Your organisation or team has achieved a score of <strong style="color:#C92049"><?php echo round($weighted/count($values),1); ?></strong> in the overall assessment. The readiness or maturity of your organisation in the five dimensions of Industry 4.0 is as follows:</p>   
                     <div class="row">
                       <div class="col-md-5">
                         <canvas id="radarChart"></canvas>
