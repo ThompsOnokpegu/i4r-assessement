@@ -29,7 +29,7 @@ include "templates/header.php";
               <div class="card-body">
                 <h2 class="text-dark">Evaluation of Industry 4.0 Readiness</h2>
                 <p class="card-text">
-                Thank you for the time to complete the industry 4.0 readiness check. Your results and a specific measure you can take to improve and progress on your industry 4.0 implementation journey for CBM are also highlighted below.
+                Your organisation or team has achieved a score of 2.4 in the overall assessment. The readiness or maturity of your organisation in the five dimensions of Industry 4.0 is as follows:
                 </p>
                 <div class="row"><!--SUMMARY CHART -->
                 <?php 
