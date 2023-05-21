@@ -4,7 +4,7 @@
     <a href="/dashboard.php" style="color:#333;"><strong>2023 &copy; <b style="color:#C92049">I4R</b><small> MODEL</small></a>.</strong></a>
   </div>
   <div class="float-right d-none d-sm-inline-block">
-    By <a href="https://deepr.ng" style="color:#999;">AJThompson</a>
+    By <a href="#" style="color:#999;">Chinedu Onyeme</a>
   </div>    
 </footer>
 </div>
