@@ -5,7 +5,7 @@ include "common/scripts.php";
 
 $connection = new PDO($dsn,$username,$password,$options);
 //session_unset();
-$qst_group = 1;
+$qst_group = 1;// a set of options with same question
 //use the question id from db unless it's the first one
 if(isset($_SESSION['qgroup'])){
   $qst_group = $_SESSION['qgroup'];
@@ -18,7 +18,7 @@ $stmt->bindValue(':qst_group', $qst_group);
 $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$count_qids = 0;
+$count_qids = 0;//holds the total number of questions in the db using the qid column
 $question = "";
 $category = "";
 $subcategory = "";
@@ -124,6 +124,9 @@ $progress_bar = intval((($last_qst-1)/$questions_count['max']) * 100);
                         <th>2</th>
                         <th>3</th>
                         <th id="rating04">4</th>
+                        <?php if($category == "Industry 4.0 Solutions"){ ?>
+                          <th>NA</th>
+                        <?php } ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -161,6 +164,14 @@ $progress_bar = intval((($last_qst-1)/$questions_count['max']) * 100);
                         <label for="<?php echo $qid."4"; ?>"></label>
                         </div>
                         </td>
+                        <?php if($category == "Industry 4.0 Solutions"){ ?>
+                              <td><div class="icheck-success">
+                              <input type="radio" value=5 id="<?php echo $qid."5"; ?>" name="<?php echo $qid; ?>" <?php if(isset($_SESSION["qid".$qid])){if($_SESSION["qid".$qid]==5) echo "checked";} ?>>
+                              <label for="<?php echo $qid."5"; ?>"></label>
+                              </div>
+                              </td>
+                        <?php } ?>
+                        
                         </tr>
                       <?php } ?> 
                     </tbody>

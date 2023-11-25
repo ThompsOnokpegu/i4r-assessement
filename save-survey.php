@@ -26,6 +26,12 @@ if(isset($_POST['save_update'])){
       $total = 0;
       $counter=0;
       for ($i=0; $i <= $count_qids; $i++) {
+        //check whether any of the responses to this question is NA
+        if($_POST[$last_qid-$i] == 5){
+          $total = 5;//NA values are saved as 5
+          $counter = 1;
+          break;
+        }
         //accumulate total score for this question 
         $total = $total + $_POST[$last_qid-$i];
         //REMEMBER user choices when the PREVIOUS button is clicked

@@ -11,7 +11,7 @@ try {
     $connection = new PDO($dsn, $username, $password, $options);
   
     //$sql = "SELECT customization,digital_feature,data_driven_service,share_revenue,data_usage,overall FROM responses WHERE user_id = '$user_id'";
-    $sql = "SELECT dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' GROUP BY dimension";
+    $sql = "SELECT dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND response <= 4 GROUP BY dimension";
     $statement = $connection->prepare($sql);
     $statement->execute();
     $data = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -27,7 +27,7 @@ try {
     $data_labels = json_encode(array_values($labels));
 
   //ORGANISATION
-  $sql = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'Organisation' GROUP BY sub_dimension";
+  $sql = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND response <= 4 AND dimension = 'Organisation' GROUP BY sub_dimension";
   $statement_org = $connection->prepare($sql);
   $statement_org->execute();
   $org_results = $statement_org->fetchAll(PDO::FETCH_ASSOC);
@@ -41,7 +41,7 @@ try {
   $org_sub = json_encode(array_values($org_labels));
 
   //PEOPLE
-  $sql_people = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'People' GROUP BY sub_dimension";
+  $sql_people = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND response <= 4 AND dimension = 'People' GROUP BY sub_dimension";
   $statement_people = $connection->prepare($sql_people);
   $statement_people->execute();
   $people_results = $statement_people->fetchAll(PDO::FETCH_ASSOC);
@@ -55,7 +55,7 @@ try {
   $people_sub = json_encode(array_values($people_labels));
 
   //TECHNOLOGY/IT SOLUTIONS
-  $sql_tech = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'Industry 4.0 Solutions' GROUP BY sub_dimension";
+  $sql_tech = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND response <= 4 AND dimension = 'Industry 4.0 Solutions' GROUP BY sub_dimension";
   $statement_tech = $connection->prepare($sql_tech);
   $statement_tech->execute();
   $tech_results = $statement_tech->fetchAll(PDO::FETCH_ASSOC);
@@ -69,7 +69,7 @@ try {
   $tech_sub = json_encode(array_values($tech_labels));
 
   //PROCESS OPERATIONS MAINTENANCE
-  $sql_pom = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'Processes, Operations and Maintenance' GROUP BY sub_dimension";
+  $sql_pom = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND response <= 4 AND dimension = 'Processes, Operations and Maintenance' GROUP BY sub_dimension";
   $statement_pom = $connection->prepare($sql_pom);
   $statement_pom->execute();
   $pom_results = $statement_pom->fetchAll(PDO::FETCH_ASSOC);
@@ -83,7 +83,7 @@ try {
   $pom_sub = json_encode(array_values($pom_labels));
 
    //SUSTAINABILITY
-   $sql_sus = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND dimension = 'Sustainability (Environment)' GROUP BY sub_dimension";
+   $sql_sus = "SELECT sub_dimension, AVG(response) AS score FROM survey_responses WHERE userid = '$userid' AND response <= 4 AND dimension = 'Sustainability (Environment)' GROUP BY sub_dimension";
    $statement_sus = $connection->prepare($sql_sus);
    $statement_sus->execute();
    $sus_results = $statement_sus->fetchAll(PDO::FETCH_ASSOC);

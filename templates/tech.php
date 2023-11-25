@@ -10,5 +10,7 @@
     <li>Simulation</li>
     <li>Cybersecurity</li>
     <li>Systems Integrations (Vertical & Horizontal)</li>
+    <li>Artificial Intelligence</li>
+    <li>Blockchain</li>
   </ul>
  

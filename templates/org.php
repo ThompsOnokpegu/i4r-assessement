@@ -7,5 +7,6 @@
     <li>Governance</li>
     <li>Communication and Collaboration (Structure)</li>
     <li>Strategy Delivery and Deployment</li>
+    <li>Liaison and Partnership</li>
   </ul>
  

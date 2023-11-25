@@ -36,7 +36,7 @@ function progress_bar_color($dimension){
 //summary plot
 $connection = new PDO($dsn, $username, $password, $options);
 
-$sql = "SELECT dimension, AVG(response) AS score FROM survey_responses GROUP BY dimension";
+$sql = "SELECT dimension, AVG(response) AS score FROM survey_responses WHERE response <= 4 GROUP BY dimension";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $data = $statement->fetchAll(PDO::FETCH_ASSOC);
