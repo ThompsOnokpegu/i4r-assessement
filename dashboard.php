@@ -59,19 +59,19 @@ $weighted = 0;
 
 
 //survey count - total
-$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid <= 95";
+$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid <= 106";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $count = $statement->fetch(PDO::FETCH_ASSOC);
 
 //survey count - completed
-$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid = 95";
+$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid = 106";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $completed = $statement->fetch(PDO::FETCH_ASSOC);
 
 //survey count - unfinished
-$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid < 95";
+$sql = "SELECT COUNT(passcode) AS total FROM users WHERE last_qid < 106";
 $statement = $connection->prepare($sql);
 $statement->execute();
 $unfinished = $statement->fetch(PDO::FETCH_ASSOC);
