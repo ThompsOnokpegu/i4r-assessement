@@ -1,6 +1,6 @@
 <?php
 require "config.php";
-
+session_destroy();
 try {
     $userid = "";
     if(isset($_GET['src'])){
