@@ -26,7 +26,7 @@ include "fetch-survey.php";
 <div class="register-box">
   <div class="card card-outline card-danger">
     <div class="card-header text-center">
-      <a aria-disabled="disabled" class="h1"><b style="color:#C92049">I4R</b><small> MODEL</small></a>
+      <a aria-disabled="disabled" class="h1"><b style="color:#C92049">CBM4.0</b><small> MODEL</small></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Enter your survey recovery code or your signup email address to continue.</p>
