@@ -83,7 +83,7 @@ if(isset($_POST['survey_signup'])){
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Survey | Product Readiness</title>
+  <title>CBM4.0 - Condition Based Maintenance for Oil & Gas - by Chinedu</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -98,7 +98,7 @@ if(isset($_POST['survey_signup'])){
 <div class="register-box">
   <div class="card card-outline card-danger">
     <div class="card-header text-center">
-      <a aria-disabled="disabled" class="h1"><b style="color:#C92049">I4R</b><small> MODEL</small></a>
+      <a aria-disabled="disabled" class="h1"><b style="color:#C92049">CBM</b><small> 4.0</small></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Enter a few details we can use to save and recover your survey, if your're not able to finish.</p>
